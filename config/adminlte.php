@@ -237,9 +237,9 @@ return [
             'topnav' => true,
         ],
         [
-            'text'       => 'Anúncios',
+            'text'       => 'Estabelecimento',
             'icon' => 'file',
-            'url'        => '#',
+            'url'        => 'estabelecimento.index',
         ],
     ],
 

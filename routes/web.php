@@ -26,3 +26,12 @@ Route::get('/home', function() {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Estabelecimento
+Route::prefix('establishment')->group(function(){
+    Route::get('/', [ClientProfileController::class, 'index'])->name('estabelecimento.index');
+});
+
+Route::prefix('adverts')->group(function(){
+    Route::get('/', [ClientProfileController::class, 'index'])->name('publicacao.index');
+});
