@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'romassoares',
             'email' => 'user@email.com',
             'password' => Hash::make('12345678'),
+            'type' => 'n',
         ]);
     }
 }

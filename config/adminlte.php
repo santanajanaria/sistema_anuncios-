@@ -232,14 +232,9 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
-            'text'       => 'Estabelecimento',
+            'text'       => 'Anuncios',
             'icon' => 'file',
-            'url'        => 'estabelecimento.index',
+            'url'        => '/adverts',
         ],
     ],
 

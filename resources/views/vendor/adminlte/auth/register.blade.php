@@ -82,6 +82,25 @@
                 </div>
             @endif
         </div>
+<!-- tipo de usuario -->
+        <div class="input-group mb-3">
+            <select class="form-control" name="type" id="type"> 
+                <option value="n">Pessoa Física</option>
+                <option value="e">Pessoa Jurídica</option>
+            </select>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+            @if($errors->has('type'))
+                <div class="invalid-feedback">
+                    <strong>{{ $errors->first('type') }}</strong>
+                </div>
+            @endif
+        </div>
+
+        
 
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">

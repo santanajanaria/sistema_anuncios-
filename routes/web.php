@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AdvertsController as AdvertsController;
+use App\Http\Controllers\EstablishmentController as EstablishmentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,15 +26,16 @@ Route::get('/home', function() {
     return view('home');
 })->name('home')->middleware('auth');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 //Estabelecimento
-Route::prefix('establishment')->group(function(){
-    Route::get('/', [ClientProfileController::class, 'index'])->name('estabelecimento.index');
+Route::prefix('establishment')->name('establishment.')->middleware('auth')->group(function () {
+    Route::get('/', [EstablishmentController::class, 'index'])->name('index');
 });
 
-Route::prefix('adverts')->group(function(){
-    Route::get('/', [ClientProfileController::class, 'index'])->name('publicacao.index');
+// anuncios
+Route::prefix('adverts')->name('adverts.')->middleware('auth')->group(function(){
+    Route::get('', [AdvertsController::class, 'index'])->name('index');
+    Route::get('/form', [AdvertsController::class, 'create'])->name('form');
+    Route::get('/edit', [AdvertsController::class, 'edit'])->name('edit');
+    Route::post('/store', [AdvertsController::class, 'store'])->name('store');
+    Route::put('/update', [AdvertsController::class, 'update'])->name('update');
 });
