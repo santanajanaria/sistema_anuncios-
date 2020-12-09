@@ -16,17 +16,28 @@
                             {!! csrf_field() !!}
                             <div class="row">
                                 <input type="hidden" name="user_id" id="user_id" value="{{$user_id}}">
-                                <div class="form-group col-md-5 m-1">
+                                <div class="form-group col-md-4 m-1">
                                     <label for="description">Descrição</label>
                                     <input class="form-control " type="text" name="description" id="description" value="{{isset($result->description)?$result->description:old('description')}}">
                                     @error('description')
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-5 m-1">
+                                <div class="form-group col-md-4 m-1">
                                     <label for="description">Contato</label>
                                     <input class="form-control " type="text" name="phone" id="phone" value="{{isset($result->phone)?$result->phone:old('phone')}}">
                                     @error('phone')
+                                    <p class="text-danger">{{$message??''}}</p>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-4 m-1">
+                                    <label for="category_id">Contato</label>
+                                    <select name="category_id" id="category_id" class="form-control">
+                                        @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->type}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>

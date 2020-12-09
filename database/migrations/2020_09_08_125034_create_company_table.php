@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdvertsTable extends Migration
+class CreateCompanyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateAdvertsTable extends Migration
      */
     public function up()
     {
-        Schema::create('adverts', function (Blueprint $table) {
+        Schema::create('company', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->string('description', 150);
-            $table->string('phone', 30);
-            $table->string('email', 100);
-            $table->string('photo')->nullable();
-            $table->softDeletes();
+            $table->string('cnpj');
+            $table->string('name');
+            $table->string('email');
+            $table->string('contact');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ class CreateAdvertsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adverts');
+        Schema::dropIfExists('company');
     }
 }

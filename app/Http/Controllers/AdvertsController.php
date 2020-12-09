@@ -28,12 +28,15 @@ class AdvertsController extends Controller
     public function create()
     {
         $user = Auth::id();
-        return view('system.adverts.form', ['user_id' => $user]);
+        $categories = DB::table('category')->get();
+        return view('system.adverts.form', ['user_id' => $user, 'categories' => $categories]);
     }
 
     public function store(AdvertsRequest $request)
     {
         $save = new Adverts();
+        $save->user_id = $request->user_id;
+        $save->category_id = $request->category_id;
         $save->description = $request->description;
         $save->phone = $request->phone;
         $save->email = $request->email;
@@ -58,11 +61,9 @@ class AdvertsController extends Controller
     {
         $result = $this->obj->find($id);
         if ($result) {
-            $data = DB::table('users')->where('id', '=', $result->user_id)->first();
-            $user = array();
-            $user['name'] = $data->name;
-            $user['type'] = $data->type;
-            return view('system.adverts.show', ['result' => $result, 'user' => $user]);
+            $user = DB::table('users')->where('id', '=', $result->user_id)->first();
+            $category = DB::table('category')->where('id', '=', $result->category_id)->first();
+            return view('system.adverts.show', ['result' => $result, 'user' => $user, 'category' => $category]);
         }
     }
 

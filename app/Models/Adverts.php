@@ -62,4 +62,8 @@ class Adverts extends Model
     {
         return $this->email;
     }
+    public function Category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

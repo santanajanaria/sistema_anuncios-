@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Establishment;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
-class EstablishmentController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class EstablishmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Establishment  $establishment
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(Establishment $establishment)
+    public function show(Company $company)
     {
         //
     }
@@ -52,10 +52,10 @@ class EstablishmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Establishment  $establishment
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Establishment $establishment)
+    public function edit(Company $company)
     {
         //
     }
@@ -64,10 +64,10 @@ class EstablishmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Establishment  $establishment
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Establishment $establishment)
+    public function update(Request $request, Company $company)
     {
         //
     }
@@ -75,10 +75,10 @@ class EstablishmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Establishment  $establishment
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Establishment $establishment)
+    public function destroy(Company $company)
     {
         //
     }
