@@ -13,8 +13,6 @@
             <tr>
               <td>#</td>
               <td>Descrição</td>
-              <td>Contato</td>
-              <td>Email</td>
               <td>Ações</td>
             </tr>
           </thead>
@@ -26,8 +24,6 @@
             <tr>
               <td>{{$i++}}</td>
               <td>{{$adverst->description}}</td>
-              <td>{{$adverst->phone}}</td>
-              <td>{{$adverst->email}}</td>
               <td>
                 <div class="form-group">
                   <a href="{{route('adverts.show',$adverst->id)}}" class="text-primary m-1"><i class="fas fa-eye"></i></a>

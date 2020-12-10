@@ -236,6 +236,11 @@ return [
             'icon' => 'file',
             'url'        => '/adverts',
         ],
+        [
+            'text'       => 'Perfil',
+            'icon' => 'file',
+            'url'        => '/perfil',
+        ],
     ],
 
     /*

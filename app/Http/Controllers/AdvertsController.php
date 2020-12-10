@@ -21,14 +21,18 @@ class AdvertsController extends Controller
 
     public function index()
     {
-        $result = $this->obj->paginate(10);
-        return view('system.adverts.index', ['result' => $result]);
+        $user = Auth::id();
+        $result = DB::table('users')->where('id', '=', $user)->first();
+        if ($result) {
+            $adverts = DB::table('adverts')->where('user_id', '=', $user)->paginate(10);
+            return view('system.adverts.index', ['result' => $adverts]);
+        }
     }
 
     public function create()
     {
         $user = Auth::id();
-        $categories = DB::table('category')->get();
+        $categories = DB::table('categories')->get();
         return view('system.adverts.form', ['user_id' => $user, 'categories' => $categories]);
     }
 
@@ -38,8 +42,6 @@ class AdvertsController extends Controller
         $save->user_id = $request->user_id;
         $save->category_id = $request->category_id;
         $save->description = $request->description;
-        $save->phone = $request->phone;
-        $save->email = $request->email;
         $save->user_id = $request->user_id;
         if ($request->hasFile('photo')) {
             $path = $request->photo->store('photo');
@@ -62,7 +64,7 @@ class AdvertsController extends Controller
         $result = $this->obj->find($id);
         if ($result) {
             $user = DB::table('users')->where('id', '=', $result->user_id)->first();
-            $category = DB::table('category')->where('id', '=', $result->category_id)->first();
+            $category = DB::table('categories')->where('id', '=', $result->category_id)->first();
             return view('system.adverts.show', ['result' => $result, 'user' => $user, 'category' => $category]);
         }
     }

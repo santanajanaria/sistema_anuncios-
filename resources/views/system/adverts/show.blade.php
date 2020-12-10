@@ -16,10 +16,10 @@
                         Categoria: {{$category->type}}
                     </div>
                     <div class="form-group">
-                        Email: {{$result->email}}
+                        Email: {{$perfil->email}}
                     </div>
                     <div class="form-group">
-                        {{$result->phone}}
+                        Contato: {{$perfil->phone}}
                     </div>
                 </div>
             </div>

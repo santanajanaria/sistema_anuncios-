@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController as HomeController;
 use App\Http\Controllers\AdvertsController as AdvertsController;
 use App\Http\Controllers\EstablishmentController as EstablishmentController;
 
@@ -11,13 +12,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::prefix('/')->name('home')->middleware('auth')->group(function () {
+    Route::get('home', [HomeController::class, 'index']);
+});
 
 //Estabelecimento
-Route::prefix('establishment')->name('establishment.')->middleware('auth')->group(function () {
-    Route::get('/', [EstablishmentController::class, 'index'])->name('index');
+Route::prefix('perfil')->name('perfil.')->middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'perfil'])->name('index');
+    Route::get('/{id}/form', [HomeController::class, 'create'])->name('form');
+    Route::post('/store/{id}', [HomeController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [HomeController::class, 'edit'])->name('edit');
+    Route::get('/{id}/show', [HomeController::class, 'show'])->name('show');
+    Route::get('/{id}/remove', [HomeController::class, 'remove'])->name('remove');
+    Route::put('/{id}/update', [HomeController::class, 'update'])->name('update');
 });
 
 // anuncios

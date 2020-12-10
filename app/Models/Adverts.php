@@ -14,8 +14,6 @@ class Adverts extends Model
         'description',
         'user_id',
         'photo',
-        'phone',
-        'email'
     ];
 
     public function setDescription($value)
@@ -36,15 +34,6 @@ class Adverts extends Model
         return $this->user_id;
     }
 
-    public function setPhone($value)
-    {
-        $this->phone = $value;
-    }
-    public function getPhone(): string
-    {
-        return $this->phone;
-    }
-
     public function setPhoto($value)
     {
         $this->photo = $value;
@@ -54,16 +43,12 @@ class Adverts extends Model
         return $this->photo;
     }
 
-    public function setEmail($value)
-    {
-        $this->email = $value;
-    }
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
     public function Category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Category::class);
+    }
+    public function User()
+    {
+        return $this->hasMany(User::class);
     }
 }

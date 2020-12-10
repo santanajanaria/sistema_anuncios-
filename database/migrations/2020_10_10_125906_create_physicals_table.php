@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhysicalTable extends Migration
+class CreatePhysicalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePhysicalTable extends Migration
      */
     public function up()
     {
-        Schema::create('physical', function (Blueprint $table) {
+        Schema::create('physicals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('cpf');
             $table->string('name');
-            $table->string('email');
             $table->string('contact');
             $table->string('cep');
             $table->string('city');
@@ -37,6 +35,6 @@ class CreatePhysicalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('physical');
+        Schema::dropIfExists('physicals');
     }
 }

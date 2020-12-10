@@ -20,8 +20,6 @@ class CreateAdvertsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('description', 150);
-            $table->string('phone', 30);
-            $table->string('email', 100);
             $table->string('photo')->nullable();
             $table->softDeletes();
             $table->timestamps();

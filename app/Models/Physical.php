@@ -12,9 +12,7 @@ class Physical extends Model
     use SoftDeletes;
     protected $fillable = [
         'user_id',
-        'cnpj',
         'name',
-        'email',
         'contact',
         'cep',
         'city',
@@ -32,15 +30,6 @@ class Physical extends Model
         return $this->user_id;
     }
 
-    public function setCpf($value)
-    {
-        $this->cpf = $value;
-    }
-    public function getCpf(): string
-    {
-        return $this->cpf;
-    }
-
     public function setName($value)
     {
         $this->name = $value;
@@ -48,15 +37,6 @@ class Physical extends Model
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function setEmail($value)
-    {
-        $this->email = $value;
-    }
-    public function getEmail(): string
-    {
-        return $this->email;
     }
 
     public function setContact($value)
@@ -113,7 +93,22 @@ class Physical extends Model
         return $this->number;
     }
 
-
+    public function cStore($request)
+    {
+        $novo = new Physical;
+        $result = $novo->create($request);
+        if ($result) {
+            return $result;
+        }
+    }
+    public function cUpdate($id, $request)
+    {
+        $teste = Physical::find($id);
+        $result = $teste->update($request);
+        if ($result) {
+            return  $result;
+        }
+    }
 
     public function user()
     {

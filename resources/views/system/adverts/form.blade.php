@@ -23,15 +23,9 @@
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>
+
                                 <div class="form-group col-md-4 m-1">
-                                    <label for="description">Contato</label>
-                                    <input class="form-control " type="text" name="phone" id="phone" value="{{isset($result->phone)?$result->phone:old('phone')}}">
-                                    @error('phone')
-                                    <p class="text-danger">{{$message??''}}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-md-4 m-1">
-                                    <label for="category_id">Contato</label>
+                                    <label for="category_id">Categoria</label>
                                     <select name="category_id" id="category_id" class="form-control">
                                         @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->type}}</option>
@@ -47,13 +41,6 @@
                                     <label for="description">foto</label>
                                     <input class="form-control " type="file" name="photo" id="photo" value="{{isset($result->photo)?$result->photo:old('photo')}}">
                                     @error('photo')
-                                    <p class="text-danger">{{$message??''}}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-md-5 m-1">
-                                    <label for="description">email</label>
-                                    <input class="form-control " type="text" name="email" id="email" value="{{isset($result->email)?$result->email:old('email')}}">
-                                    @error('email')
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>

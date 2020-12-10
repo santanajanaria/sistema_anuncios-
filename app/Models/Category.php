@@ -13,8 +13,17 @@ class Category extends Model
     protected $fillable = [
         'type',
     ];
+    public function setType($value)
+    {
+        $this->type = $value;
+    }
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
     public function adverts()
     {
-        return $this->hasMany(Adverts::class);
+        return $this->belongsTo(Adverts::class);
     }
 }

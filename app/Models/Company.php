@@ -14,7 +14,6 @@ class Company extends Model
         'user_id',
         'cnpj',
         'name',
-        'email',
         'contact',
     ];
 
@@ -45,14 +44,6 @@ class Company extends Model
         return $this->name;
     }
 
-    public function setEmail($value)
-    {
-        $this->email = $value;
-    }
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
 
     public function setContact($value)
     {
@@ -61,6 +52,23 @@ class Company extends Model
     public function getContact(): string
     {
         return $this->contact;
+    }
+
+    public function cStore($request)
+    {
+        $novo = new Company;
+        $result = $novo->create($request);
+        if ($result) {
+            return $result;
+        }
+    }
+    public function cUpdate($request, $id)
+    {
+        $teste = Company::find($id);
+        $result = $teste->update($request);
+        if ($result) {
+            return  $result;
+        }
     }
 
     public function user()
