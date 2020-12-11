@@ -16,10 +16,10 @@
                         <form name="formProduct" id="formProduct" method="post" action="{{route('perfil.store',$user_id)}}" enctype="multipart/form-data">
                             @endif
                             {!! csrf_field() !!}
-                            <input type="hidden" name="user_id" id="user_id" value="{{$user_id}}">
+                            <input type="hidden" name="user_id" id="user_id" value="{{$users->id}}">
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    <label for="name">{{$type=='n'?'nome':'Nome da Empresa'}}</label>
+                                    <label for="name">{{$users->type=='n'?'nome':'Nome da Empresa'}}</label>
                                     <input type="text" name="name" id="name" class="form-control" value="{{isset($result->name)?$result->name:old('name')}}">
                                     @error('name')
                                     <p class="text-danger">{{$message??''}}</p>
@@ -33,7 +33,7 @@
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>
-                                @if($type == 'e')
+                                @if($users->type == 'e')
                                 <div class="form-group col-md-4">
                                     <label for="cnpj">cnpj</label>
                                     <input type="text" name="cnpj" id="cnpj" class="form-control" value="{{isset($result->cnpj)?$result->cnpj:old('cnpj')}}">

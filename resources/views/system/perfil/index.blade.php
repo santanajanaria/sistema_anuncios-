@@ -9,30 +9,35 @@
 
         </div>
         <div class="card-body">
+          @if($perfil)
           <div class="form-group">
-            <p>name</p>
-            <p>contact</p>
-            @if($type == 'e')
-            <p>cnpj
-              @endif
-          </div>
-
-          <div class="form-group">
+            <p>{{$perfil->name}}</p>
+            @if($users->type == 'e')
+            <p>cnpj</p>
+            @endif
+            <p>{{$perfil->contact}}</p>
           </div>
           <div class="form-group">
-            <p>cep</p>
-            <p>city</p>
-            <p>address</p>
+            <p>{{$perfil->cep}}</p>
+            <p>{{$perfil->city}}</p>
+            <p>{{$perfil->address}}</p>
           </div>
           <div class="form-group">
-            <p>street</p>
-            <p>number</p>
+            <p>{{$perfil->street}}</p>
+            <p>{{$perfil->number}}</p>
           </div>
           <div class="form-group">
-            <a href="{{route('perfil.form',$user)}}">
-              <button class="btn btn-success">Perfil</button>
+            <a href="{{route('perfil.edit',$users->id)}}">
+              <button class="btn btn-success">Editar</button>
             </a>
           </div>
+          @else
+          <div class="form-group">
+            <a href="{{route('perfil.form',$users->id)}}">
+              <button class="btn btn-success">cadastrar</button>
+            </a>
+          </div>
+          @endif
         </div>
       </div>
     </div>

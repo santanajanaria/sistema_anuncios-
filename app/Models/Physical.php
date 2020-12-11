@@ -101,9 +101,10 @@ class Physical extends Model
             return $result;
         }
     }
-    public function cUpdate($id, $request)
+    public function cUpdate($request)
     {
-        $teste = Physical::find($id);
+        dd($request);
+        $teste = Physical::find($request->id);
         $result = $teste->update($request);
         if ($result) {
             return  $result;

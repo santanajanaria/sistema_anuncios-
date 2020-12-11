@@ -43,12 +43,13 @@ class Adverts extends Model
         return $this->photo;
     }
 
+
     public function Category()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
     public function User()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo('App\User');
     }
 }

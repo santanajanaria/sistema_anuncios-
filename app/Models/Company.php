@@ -62,9 +62,9 @@ class Company extends Model
             return $result;
         }
     }
-    public function cUpdate($request, $id)
+    public function cUpdate($request)
     {
-        $teste = Company::find($id);
+        $teste = Company::find($request->id);
         $result = $teste->update($request);
         if ($result) {
             return  $result;

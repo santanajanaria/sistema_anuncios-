@@ -24,6 +24,6 @@ class Category extends Model
 
     public function adverts()
     {
-        return $this->belongsTo(Adverts::class);
+        return $this->belongsTo('App\Adverts');
     }
 }

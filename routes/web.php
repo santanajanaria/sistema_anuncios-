@@ -22,9 +22,9 @@ Route::prefix('perfil')->name('perfil.')->middleware('auth')->group(function () 
     Route::get('/{id}/form', [HomeController::class, 'create'])->name('form');
     Route::post('/store/{id}', [HomeController::class, 'store'])->name('store');
     Route::get('/{id}/edit', [HomeController::class, 'edit'])->name('edit');
+    Route::put('/{id}/update', [HomeController::class, 'update'])->name('update');
     Route::get('/{id}/show', [HomeController::class, 'show'])->name('show');
     Route::get('/{id}/remove', [HomeController::class, 'remove'])->name('remove');
-    Route::put('/{id}/update', [HomeController::class, 'update'])->name('update');
 });
 
 // anuncios
