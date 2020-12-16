@@ -11,10 +11,6 @@
         <div class="card-body">
           @if($perfil)
           <div class="form-group">
-            <p>{{$perfil->name}}</p>
-            @if($users->type == 'e')
-            <p>cnpj</p>
-            @endif
             <p>{{$perfil->contact}}</p>
           </div>
           <div class="form-group">
@@ -27,7 +23,7 @@
             <p>{{$perfil->number}}</p>
           </div>
           <div class="form-group">
-            <a href="{{route('perfil.edit',$users->id)}}">
+            <a href="{{route('perfil.edit',$perfil->user_id)}}">
               <button class="btn btn-success">Editar</button>
             </a>
           </div>

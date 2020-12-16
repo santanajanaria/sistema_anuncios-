@@ -14,8 +14,9 @@
                         <form name="formProduct" id="formProduct" method="post" action="{{route('adverts.store')}}" enctype="multipart/form-data">
                             @endif
                             {!! csrf_field() !!}
+                            <input type="hidden" name="profile_id" id="profile_id" value="{{isset($result->profile_id)?$result->profile_id:$profile->id}}">
+                            <input type="hidden" name="tP_id" id="tP_id" value="{{isset($result->tP_id)?$result->tP_id:$profile->tP_id}}">
                             <div class="row">
-                                <input type="hidden" name="user_id" id="user_id" value="{{$user_id}}">
                                 <div class="form-group col-md-4 m-1">
                                     <label for="description">Descrição</label>
                                     <input class="form-control " type="text" name="description" id="description" value="{{isset($result->description)?$result->description:old('description')}}">
@@ -28,7 +29,7 @@
                                     <label for="category_id">Categoria</label>
                                     <select name="category_id" id="category_id" class="form-control">
                                         @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->type}}</option>
+                                        <option {{$result->category_id == $category->id?'selected':''}} value="{{$category->id}}">{{$category->type}}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
@@ -39,7 +40,12 @@
                             <div class="row">
                                 <div class="form-group col-md-5 m-1">
                                     <label for="description">foto</label>
-                                    <input class="form-control " type="file" name="photo" id="photo" value="{{isset($result->photo)?$result->photo:old('photo')}}">
+                                    <div class="col-5 text-center">
+                                        @if(isset($result))
+                                        <img src="{{asset(str_replace('photo','imagens',$result->photo))}}" alt="user-avatar" class="img-circle img-fluid">
+                                        @endif
+                                        <input type="file" name="photo" id="photo" value="{{isset($result->photo)?asset(str_replace('photo','imagens',$result->photo)):old('photo')}}">
+                                    </div>
                                     @error('photo')
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror

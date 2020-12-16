@@ -6,17 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Company extends Model
+class LegalNature extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $fillable = [
         'user_id',
+        'cpf',
         'cnpj',
-        'name',
-        'contact',
     ];
-
     public function setUserId($value)
     {
         $this->user_id = $value;
@@ -25,7 +24,14 @@ class Company extends Model
     {
         return $this->user_id;
     }
-
+    public function setCpf($value)
+    {
+        $this->cpf = $value;
+    }
+    public function getCpf(): string
+    {
+        return $this->cpf;
+    }
     public function setCnpj($value)
     {
         $this->cnpj = $value;
@@ -35,28 +41,9 @@ class Company extends Model
         return $this->cnpj;
     }
 
-    public function setName($value)
-    {
-        $this->name = $value;
-    }
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-
-    public function setContact($value)
-    {
-        $this->contact = $value;
-    }
-    public function getContact(): string
-    {
-        return $this->contact;
-    }
-
     public function cStore($request)
     {
-        $novo = new Company;
+        $novo = new LegalNature();
         $result = $novo->create($request);
         if ($result) {
             return $result;
@@ -64,15 +51,15 @@ class Company extends Model
     }
     public function cUpdate($request)
     {
-        $teste = Company::find($request->id);
+        $teste = LegalNature::find($request->id);
         $result = $teste->update($request);
         if ($result) {
             return  $result;
         }
     }
 
-    public function user()
+    public function adverts()
     {
-        return $this->hasOne('App\Models\User');
+        return $this->belongsTo('App\Adverts');
     }
 }

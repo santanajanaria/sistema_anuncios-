@@ -19,7 +19,6 @@
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
                 <div class="card-header text-muted border-bottom-0">
-
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
@@ -27,26 +26,24 @@
                       <h2 class="lead"><b>{{$advert->description}}</b></h2>
                       <p class="text-muted text-sm">
                         <b>Categoria: </b>
-                        @foreach($categories as $category)
-                        @if($category->id == $advert->category_id)
-                        {{$category->type}}
-                        @endif
-                        @endforeach
+                        {{$advert->Category->type}}
                       </p>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
-                        @if(isset($perfil->user_id) == $advert->user_id)
                         <li class="small"><span class="fa-li">
                             <i class="fas fa-lg fa-building"></i>
                           </span> Endereço:
-                          {{$perfil->cep}}
-                          {{$perfil->city}}
-                          {{$perfil->address}}
-                          {{$perfil->street}}
-                          {{$perfil->number}}
+                          {{$advert->Profile->cep}}
+                          {{$advert->Profile->city}}
+                          {{$advert->Profile->address}}
+                          {{$advert->Profile->street}}
+                          {{$advert->Profile->number}}
                         </li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : {{$perfil->contact}}</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : {{$perfil->name}}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Contato : {{$advert->Profile->contact}}</li>
+                        @foreach($users as $user)
+                        @if($user->id == $advert->Profile->user_id)
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-user"></i></span> Nome : {{$user->name}}</li>
                         @endif
+                        @endforeach
                       </ul>
                     </div>
                     <div class="col-5 text-center">

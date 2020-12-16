@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
-use App\Models\Physical;
+use App\Models\Adverts;
+use App\Models\Category;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,13 +12,15 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     private $obj;
-    private $com;
-    private $phy;
+    private $pro;
+    private $adv;
+    private $cat;
 
     public function __construct()
     {
-        $this->phy = new Physical();
-        $this->com = new Company();
+        $this->adv = new Adverts();
+        $this->cat = new Category();
+        $this->pro = new Profile();
         $this->middleware('auth');
     }
 
@@ -28,35 +31,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::id();
-        $result = DB::table('users')->where('id', '=', $user)->first();
-        if ($result) {
-            $adverts = DB::table('adverts')->paginate(30);
-            $category = DB::table('categories')->get();
-            if ($result->type == 'n') {
-                $type = DB::table('physicals')
-                    ->where('user_id', '=', $result->id)
-                    ->first();
-                return view('home', ['users' => $result, 'adverts' => $adverts, 'perfil' => $type, 'categories' => $category]);
-            } else {
-                $type = DB::table('companies')
-                    ->where('user_id', '=', $result->id)
-                    ->first();
-                return view('home', ['users' => $result, 'adverts' => $adverts, 'perfil' => $type, 'categories' => $category]);
-            }
-        }
+        $result = DB::table('users')->get();
+        $adverts = $this->adv->paginate(30);
+        return view('home', ['users' => $result, 'adverts' => $adverts]);
     }
     public function perfil()
     {
         $user = Auth::id();
         $result = DB::table('users')->where('id', '=', $user)->first();
-        if ($result->type == 'n') {
-            $type = DB::table('Physicals')->where('user_id', $result->id)->get()->first();
-            return view('system.perfil.index', ['users' => $result, 'perfil' => $type]);
-        } else {
-            $type = DB::table('companies')
-                ->where('user_id', '=', $result->id)
-                ->first();
+        if ($result) {
+            $type = DB::table('profiles')->where('user_id', $result->id)->get()->first();
             return view('system.perfil.index', ['users' => $result, 'perfil' => $type]);
         }
     }
@@ -64,29 +48,24 @@ class HomeController extends Controller
     public function create()
     {
         $user = Auth::id();
-        $result = DB::table('users')->where('id', '=', $user)->first();
-        return view('system.perfil.form', ['user_id' => $user, 'type' => $result->type]);
+        // $result = DB::table('users')->where('id', '=', $user)->first();
+        $tP = DB::table('legal_natures')->where('user_id', $user)->first();
+        if (isset($tP)) {
+            return view('system.perfil.form', ['users' => $user, 'tP_id' => $tP->id]);
+        } else {
+            return redirect()->route('legalNatures.form', ['user_id' => $user]);
+        }
     }
 
     public function store(Request $request, $user_id)
     {
         $result = DB::table('users')->where('id', '=', $user_id)->first();
-        if ($result->type == 'n') {
-            $perfil = $request->only(['name', 'contact', 'cep', 'city', 'address', 'street', 'number', 'user_id']);
-            $store = $this->phy->cStore($perfil);
+        if (isset($result)) {
+            $perfil = $request->only(['user_id', 'tP_id', 'contact', 'cep', 'city', 'address', 'street', 'number']);
+            $store = $this->pro->cStore($perfil);
             if ($store) {
                 DB::commit();
-                return redirect()->route('adverts.index')->with('error', 'item adcionado com successo');
-            } else {
-                DB::rollBack();
-                return redirect()->back()->with('error', 'Houve um erro ao tentar cadastrar o anúncio');
-            }
-        } else {
-            $perfil = $request->only(['name', 'contact', 'cep', 'city', 'address', 'street', 'number', 'cnpj', 'user_id']);
-            $store = $this->com->cStore($perfil);
-            if ($store) {
-                DB::commit();
-                return redirect()->route('adverts.index')->with('error', 'item adcionado com successo');
+                return redirect()->route('adverts.form')->with('error', 'item adcionado com successo');
             } else {
                 DB::rollBack();
                 return redirect()->back()->with('error', 'Houve um erro ao tentar cadastrar o anúncio');
@@ -106,29 +85,19 @@ class HomeController extends Controller
 
     public function edit($id)
     {
-        $user = DB::table('users')->where('id', '=', $id)->first();
-        if ($user->type == 'n') {
-            $type = DB::table('Physicals')->where('user_id', $user->id)->get()->first();
-            return view('system.perfil.form', ['users' => $user, 'result' => $type]);
-        } else {
-            $type = DB::table('companies')
-                ->where('user_id', '=', $user->id)
-                ->first();
-            return view('system.perfil.form', ['users' => $user, 'result' => $type]);
-        }
+        $type = DB::table('Profiles')->where('user_id', $id)->first();
+        $user = DB::table('users')->find($id);
+        return view('system.perfil.form', ['user' => $user, 'profile' => $type]);
     }
 
     public function update(Request $request)
     {
         $user = DB::table('users')->where('id', $request->user_id)->first();
-        $result = $request->only(['name', 'contact', 'cep', 'city', 'address', 'street', 'number', 'user_id']);
-        if ($user->type == 'n') {
-            $user_id = DB::table('physycals')->where('user_id', $user->id);
-            $result = $this->phy->cUpdate($result);
+        $result = $request->only(['user_id', 'tP_id', 'contact', 'cep', 'city', 'address', 'street', 'number']);
+        $result = $this->pro->cUpdate($result);
+        if ($result) {
             return redirect()->route('perfil.index');
         } else {
-            $user_id = DB::table('companies')->where('user_id', $user->id);
-            $result = $this->com->cUpdate($result, $user_id);
             return redirect()->route('perfil.index');
         }
     }

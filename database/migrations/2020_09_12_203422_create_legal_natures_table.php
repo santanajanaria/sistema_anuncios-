@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhysicalsTable extends Migration
+class CreateLegalNaturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreatePhysicalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('physicals', function (Blueprint $table) {
+        Schema::create('legal_natures', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('name');
-            $table->string('contact');
-            $table->string('cep');
-            $table->string('city');
-            $table->string('address');
-            $table->string('street');
-            $table->string('number');
+            $table->string('cpf')->nullable();
+            $table->string('cnpj')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ class CreatePhysicalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('physicals');
+        Schema::dropIfExists('legal_natures');
     }
 }

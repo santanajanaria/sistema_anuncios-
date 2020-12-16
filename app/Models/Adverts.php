@@ -12,9 +12,18 @@ class Adverts extends Model
     use SoftDeletes;
     protected $fillable = [
         'description',
-        'user_id',
+        'profile_id',
+        'tP_Id',
         'photo',
     ];
+    public function settPId($value)
+    {
+        $this->tP_id = $value;
+    }
+    public function gettPId(): string
+    {
+        return $this->tP_id;
+    }
 
     public function setDescription($value)
     {
@@ -25,13 +34,13 @@ class Adverts extends Model
         return $this->description;
     }
 
-    public function setUser($value)
+    public function setProfile($value)
     {
-        $this->user_id = $value;
+        $this->profile_id = $value;
     }
-    public function getUser(): string
+    public function getProfile(): string
     {
-        return $this->user_id;
+        return $this->profile_id;
     }
 
     public function setPhoto($value)
@@ -50,6 +59,14 @@ class Adverts extends Model
     }
     public function User()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
+    }
+    public function LegalNatures()
+    {
+        return $this->belongsTo(LegalNature::class);
+    }
+    public function Profile()
+    {
+        return $this->belongsTo(Profile::class);
     }
 }

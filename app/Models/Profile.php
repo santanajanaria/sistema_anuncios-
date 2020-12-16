@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Physical extends Model
+class Profile extends Model
 {
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
+        'tP_id',
         'user_id',
-        'name',
         'contact',
         'cep',
         'city',
@@ -95,7 +95,7 @@ class Physical extends Model
 
     public function cStore($request)
     {
-        $novo = new Physical;
+        $novo = new Profile();
         $result = $novo->create($request);
         if ($result) {
             return $result;
@@ -103,16 +103,19 @@ class Physical extends Model
     }
     public function cUpdate($request)
     {
-        dd($request);
-        $teste = Physical::find($request->id);
+        $teste = Profile::where('user_id', $request['user_id'])->first();
         $result = $teste->update($request);
         if ($result) {
             return  $result;
         }
     }
 
-    public function user()
+    public function User()
     {
-        return $this->hasOne('App\Models\User');
+        return $this->hasMany(User::class);
+    }
+    public function Adverts()
+    {
+        return $this->belongsTo(Adverts::class);
     }
 }

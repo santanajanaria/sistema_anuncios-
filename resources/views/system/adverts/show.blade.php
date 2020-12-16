@@ -13,13 +13,13 @@
                         <img src="{{asset(str_replace('photo','imagens',$result->photo))}}" style="width:100px;height:auto" alt="">
                     </div>
                     <div class="form-group">
-                        Categoria: {{$category->type}}
+                        Categoria: {{$result->Category->type}}
                     </div>
                     <div class="form-group">
-                        Email: {{$perfil->email}}
+                        Email: {{$user->email}}
                     </div>
                     <div class="form-group">
-                        Contato: {{$perfil->phone}}
+                        Contato: {{$result->Profile->cantact}}
                     </div>
                 </div>
             </div>

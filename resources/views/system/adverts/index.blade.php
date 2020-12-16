@@ -20,15 +20,15 @@
             @php
             $i = 0;
             @endphp
-            @foreach($result as $adverst)
+            @foreach($result as $advert)
             <tr>
               <td>{{$i++}}</td>
-              <td>{{$adverst->description}}</td>
+              <td>{{$advert->description}}</td>
               <td>
                 <div class="form-group">
-                  <a href="{{route('adverts.show',$adverst->id)}}" class="text-primary m-1"><i class="fas fa-eye"></i></a>
-                  <a href="{{route('adverts.edit',$adverst->id)}}" class="text-warning m-2"><i class="fas fa-edit"></i></a>
-                  <a href="{{route('adverts.remove',$adverst->id)}}" class="text-danger m-1"><i class="fas fa-archive"></i></a>
+                  <a href="{{route('adverts.show',$advert->id)}}" class="text-primary m-1"><i class="fas fa-eye"></i></a>
+                  <a href="{{route('adverts.edit',$advert->id)}}" class="text-warning m-2"><i class="fas fa-edit"></i></a>
+                  <a href="{{route('adverts.remove',$advert->id)}}" class="text-danger m-1"><i class="fas fa-archive"></i></a>
                 </div>
               </td>
             </tr>
@@ -38,6 +38,7 @@
         </table>
         <div class="card-footer">
           <a href="{{route('adverts.form')}}"><button class="btn btn-success"> <i class="fas fa-file"></i> criar</button></a>
+          <a href="/adverts/removed"> <button class="btn btn-danger"> <i class="fas fa-archive"></i> Arquivos Removidos</button> </a>
         </div>
       </div>
     </div>
