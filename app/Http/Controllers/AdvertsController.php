@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdvertsRequest;
 use App\Models\Adverts;
 use App\Models\Category;
+use App\Models\Profile;
+use App\Models\User;
+use App\Models\Views;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -14,20 +17,28 @@ class AdvertsController extends Controller
 {
     private $cat;
     private $obj;
+    private $use;
+    private $vie;
+    private $pro;
 
     public function __construct()
     {
+        $this->pro = new Profile();
         $this->cat = new Category();
         $this->obj = new Adverts();
+        $this->use = new User();
+        $this->vie = new Views();
     }
 
     public function index()
     {
         $user = Auth::id();
-        $result = DB::table('users')->where('id', '=', $user)->first();
-        if ($result) {
-            $adverts = $this->obj->where('profile_id', '=', $user)->paginate(10);
+        $profile = $this->pro->where('user_id', '=', $user)->first();
+        if ($profile) {
+            $adverts = $this->obj->where('profile_id', '=', $profile->id)->paginate(10);
             return view('system.adverts.index', ['result' => $adverts]);
+        } else {
+            return view('system.adverts.index');
         }
     }
 
@@ -144,5 +155,41 @@ class AdvertsController extends Controller
                 return redirect()->route('adverts.show', $id)->with('success', 'arquivo restaurado com sucesso');
             }
         }
+    }
+
+    public function advertView($request)
+    {
+        $advert = $this->obj->find($request);
+        $user = Auth::id();
+        if ($user != $advert->Profile->user_id) {
+            $view = $this->vie->where('advert_id', $advert->id)->first();
+            if (isset($view->advert_id) == $request) {
+                $view->look = $view->look + 1;
+            } else {
+                $view = new Views();
+                $view->advert_id = $request;
+                $view->look = 1;
+            }
+            $save = $view->save();
+            if ($save) {
+                return view('show', ['result' => $advert]);
+            }
+        } else {
+            return redirect()->route('adverts.show', $request);
+        }
+    }
+    public function search(Request $label)
+    {
+        $search = $this->obj->where('description', 'like', "%$label->searchAdvert%")->paginate();
+        $views  = $this->vie->all();
+        $category = $this->cat->all();
+        return view('home', ['adverts' => $search, 'views' => $views, 'category' => $category]);
+    }
+    public function searchC(Request $label)
+    {
+        $search = $this->obj->where('category_id', '=', $label->searchC)->paginate();
+        $views  = $this->vie->all();
+        $category = $this->cat->all();
+        return view('home', ['adverts' => $search, 'views' => $views, 'category' => $category]);
     }
 }

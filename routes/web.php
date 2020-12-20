@@ -31,7 +31,6 @@ Route::prefix('perfil')->name('perfil.')->middleware('auth')->group(function () 
     Route::get('/{id}/edit', [HomeController::class, 'edit'])->name('edit');
     Route::put('/{id}/update', [HomeController::class, 'update'])->name('update');
     Route::get('/{id}/show', [HomeController::class, 'show'])->name('show');
-    Route::get('/{id}/remove', [HomeController::class, 'remove'])->name('remove');
 });
 
 // anuncios
@@ -45,4 +44,7 @@ Route::prefix('adverts')->name('adverts.')->middleware('auth')->group(function (
     Route::get('/removed', [AdvertsController::class, 'removed'])->name('removed');
     Route::get('/{id}/restore', [AdvertsController::class, 'restore'])->name('restore');
     Route::put('/{id}/update', [AdvertsController::class, 'update'])->name('update');
+    Route::post('/search', [AdvertsController::class, 'search'])->name('search');
+    Route::post('/searchC', [AdvertsController::class, 'searchC'])->name('searchC');
+    Route::get('/{id}/view', [AdvertsController::class, 'advertView'])->name('view');
 });

@@ -69,4 +69,8 @@ class Adverts extends Model
     {
         return $this->belongsTo(Profile::class);
     }
+    public function Views()
+    {
+        return $this->belongsTo(Views::class);
+    }
 }

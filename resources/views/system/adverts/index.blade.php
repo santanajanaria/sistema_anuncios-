@@ -16,6 +16,7 @@
               <td>Ações</td>
             </tr>
           </thead>
+          @if(isset($result))
           <tbody>
             @php
             $i = 0;
@@ -35,6 +36,7 @@
             @endforeach
           </tbody>
           {{ $result->links() }}
+          @endif
         </table>
         <div class="card-footer">
           <a href="{{route('adverts.form')}}"><button class="btn btn-success"> <i class="fas fa-file"></i> criar</button></a>

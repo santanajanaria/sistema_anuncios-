@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Adverts;
 use App\Models\Category;
 use App\Models\Profile;
+use App\Models\Views;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,19 +22,16 @@ class HomeController extends Controller
         $this->adv = new Adverts();
         $this->cat = new Category();
         $this->pro = new Profile();
+        $this->vie = new Views();
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $result = DB::table('users')->get();
         $adverts = $this->adv->paginate(30);
-        return view('home', ['users' => $result, 'adverts' => $adverts]);
+        $views = $this->vie->all();
+        $category = $this->cat->all();
+        return view('home', ['adverts' => $adverts, 'views' => $views, 'category' => $category]);
     }
     public function perfil()
     {
@@ -48,10 +46,10 @@ class HomeController extends Controller
     public function create()
     {
         $user = Auth::id();
-        // $result = DB::table('users')->where('id', '=', $user)->first();
+        $result = DB::table('profiles')->where('user_id', '=', $user)->first();
         $tP = DB::table('legal_natures')->where('user_id', $user)->first();
         if (isset($tP)) {
-            return view('system.perfil.form', ['users' => $user, 'tP_id' => $tP->id]);
+            return view('system.perfil.form', ['users' => $user, 'tP_id' => $tP->id, 'profile' => $result]);
         } else {
             return redirect()->route('legalNatures.form', ['user_id' => $user]);
         }
@@ -92,7 +90,6 @@ class HomeController extends Controller
 
     public function update(Request $request)
     {
-        $user = DB::table('users')->where('id', $request->user_id)->first();
         $result = $request->only(['user_id', 'tP_id', 'contact', 'cep', 'city', 'address', 'street', 'number']);
         $result = $this->pro->cUpdate($result);
         if ($result) {
@@ -100,14 +97,5 @@ class HomeController extends Controller
         } else {
             return redirect()->route('perfil.index');
         }
-    }
-
-    public function destroy()
-    {
-        //
-    }
-    public function remove()
-    {
-        //
     }
 }

@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
     public function Adverts()
     {
-        return $this->belongsTo('App\Adverts');
+        return $this->belongsTo(Adverts::class);
     }
 }

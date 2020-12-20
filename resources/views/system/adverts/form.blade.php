@@ -24,12 +24,11 @@
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>
-
                                 <div class="form-group col-md-4 m-1">
                                     <label for="category_id">Categoria</label>
                                     <select name="category_id" id="category_id" class="form-control">
                                         @foreach($categories as $category)
-                                        <option {{$result->category_id == $category->id?'selected':''}} value="{{$category->id}}">{{$category->type}}</option>
+                                        <option {{isset($result->category_id) == $category->id?'selected':''}} value="{{$category->id}}">{{$category->type}}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
