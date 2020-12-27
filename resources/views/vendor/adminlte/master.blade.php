@@ -86,6 +86,8 @@
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('vendor/mask/jquery.mask.js') }}"></script>
+    <script src="{{ asset('vendor/mask/masksInputs.js') }}"></script>
 
     {{-- Configured Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])
