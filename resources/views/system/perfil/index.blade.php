@@ -10,21 +10,33 @@
         </div>
         <div class="card-body">
           @if($perfil)
-          <div class="form-group">
-            <p>{{$perfil->contact}}</p>
-          </div>
-          <div class="form-group">
-            <p>{{$perfil->cep}}</p>
-            <p>{{$perfil->city}}</p>
-            <p>{{$perfil->address}}</p>
-          </div>
-          <div class="form-group">
-            <p>{{$perfil->street}}</p>
-            <p>{{$perfil->number}}</p>
+          <div class="row">
+            <div class="form-group col">
+              <div class="col"><strong>CONTATO:</strong>
+                <p class="text-uppercase">{{$perfil->contact}}</p>
+              </div>
+              <div class="col"><strong>CEP:</strong>
+                <p class="text-uppercase">{{$perfil->cep}}</p>
+              </div>
+              <div class="col"><strong>CIDADE:</strong>
+                <p class="text-uppercase">{{$perfil->city}}</p>
+              </div>
+            </div>
+            <div class="form-group col">
+              <div class="col"><strong>BAIRRO:</strong>
+                <p class="text-uppercase">{{$perfil->address}}</p>
+              </div>
+              <div class="col"><strong>RUA:</strong>
+                <p class="text-uppercase">{{$perfil->street}}</p>
+              </div>
+              <div class="col"><strong>NUMERO:</strong>
+                <p class="text-uppercase">{{$perfil->number}}</p>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <a href="{{route('perfil.edit',$perfil->user_id)}}">
-              <button class="btn btn-success">Editar</button>
+              <button class="btn btn-success"><i class="fas fa-edit"></i> Editar</button>
             </a>
           </div>
           @else

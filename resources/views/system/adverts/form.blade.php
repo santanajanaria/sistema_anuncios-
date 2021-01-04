@@ -17,14 +17,14 @@
                             <input type="hidden" name="profile_id" id="profile_id" value="{{isset($result->profile_id)?$result->profile_id:$profile->id}}">
                             <input type="hidden" name="tP_id" id="tP_id" value="{{isset($result->tP_id)?$result->tP_id:$profile->tP_id}}">
                             <div class="row">
-                                <div class="form-group col-md-4 m-1">
+                                <div class="form-group col-md-4">
                                     <label for="description">Descrição</label>
                                     <input class="form-control " type="text" name="description" id="description" value="{{isset($result->description)?$result->description:old('description')}}">
                                     @error('description')
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-4 m-1">
+                                <div class="form-group col-md-4">
                                     <label for="category_id">Categoria</label>
                                     <select name="category_id" id="category_id" class="form-control">
                                         @foreach($categories as $category)
@@ -35,9 +35,7 @@
                                     <p class="text-danger">{{$message??''}}</p>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-5 m-1">
+                                <div class="form-group col-md-4">
                                     <label for="description">foto</label>
                                     <div class="col-5 text-center">
                                         @if(isset($result))
@@ -51,21 +49,21 @@
                                 </div>
                             </div>
                             @if($result??'')
-                            <button class="btn btn-{{($result??'')?'warning':'info'}}" type="submit">
+                            <button class=" btn btn-{{($result??'')?'warning':'info'}}" type="submit">
                                 <i class="fas fa-edit"></i>
                                 Editar
                             </button>
                             @else
-                            <button class="btn btn-{{($result??'')?'info':'success'}}" type="submit"><i class="fas fa-plus"></i>
+                            <button class=" btn btn-{{($result??'')?'info':'success'}}" type="submit"><i class="fas fa-plus"></i>
                                 Cadastrar
                             </button>
                             @endif
+                            <a href="{{route('adverts.index')}}" class="">
+                                <button class="btn btn-default ">
+                                    <i class="fas fa-reply"></i>Voltar
+                                </button>
+                            </a>
                         </form>
-                        <a href="{{route('adverts.index')}}">
-                            <button class="btn btn-default">
-                                <i class="fas fa-reply"></i>Voltar
-                            </button>
-                        </a>
                 </div>
             </div>
         </div>
