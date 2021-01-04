@@ -22,8 +22,8 @@ class Category extends Model
         return $this->type;
     }
 
-    public function adverts()
+    public function Adverts()
     {
-        return $this->belongsTo('App\Adverts');
+        return $this->belongsTo(Adverts::class);
     }
 }

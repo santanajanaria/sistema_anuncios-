@@ -13,17 +13,9 @@ class Adverts extends Model
     protected $fillable = [
         'description',
         'profile_id',
-        'tP_Id',
+        'category_id',
         'photo',
     ];
-    public function settPId($value)
-    {
-        $this->tP_id = $value;
-    }
-    public function gettPId(): string
-    {
-        return $this->tP_id;
-    }
 
     public function setDescription($value)
     {
@@ -41,6 +33,15 @@ class Adverts extends Model
     public function getProfile(): string
     {
         return $this->profile_id;
+    }
+
+    public function setCategory($value)
+    {
+        $this->category = $value;
+    }
+    public function getCategory(): string
+    {
+        return $this->category;
     }
 
     public function setPhoto($value)
@@ -61,7 +62,7 @@ class Adverts extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function LegalNatures()
+    public function LegalNature()
     {
         return $this->belongsTo(LegalNature::class);
     }

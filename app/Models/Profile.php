@@ -118,4 +118,8 @@ class Profile extends Model
     {
         return $this->belongsTo(Adverts::class);
     }
+    public function LegalNature()
+    {
+        return $this->belongsTo(LegalNature::class);
+    }
 }

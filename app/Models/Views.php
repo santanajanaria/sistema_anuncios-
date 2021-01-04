@@ -28,7 +28,7 @@ class Views extends Model
     {
         return $this->look;
     }
-    public function adverts()
+    public function Adverts()
     {
         return $this->belongsTo(Adverts::class);
     }

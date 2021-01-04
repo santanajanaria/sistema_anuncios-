@@ -58,8 +58,12 @@ class LegalNature extends Model
         }
     }
 
-    public function adverts()
+    public function Adverts()
     {
-        return $this->belongsTo('App\Adverts');
+        return $this->belongsTo(Adverts::class);
+    }
+    public function Profile()
+    {
+        return $this->belongsTo(Profile::class);
     }
 }

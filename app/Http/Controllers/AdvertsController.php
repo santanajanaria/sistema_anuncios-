@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdvertsRequest;
 use App\Models\Adverts;
 use App\Models\Category;
+use App\Models\LegalNature;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Views;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -81,9 +83,9 @@ class AdvertsController extends Controller
     {
         $result = $this->obj->find($id);
         if ($result) {
-            $id = Auth::id();
-            $user = DB::table('users')->where('id', '=', $id)->first();
-            return view('system.adverts.show', ['result' => $result, 'user' => $user]);
+            $view = Views::where('advert_id', $id)->get();
+            $legalNature = LegalNature::where('user_id', $result->Profile->user_id)->get()->first();
+            return view('system.adverts.show', ['result' => $result, 'legalNature' => $legalNature, 'view' => $view]);
         }
     }
 
@@ -119,10 +121,6 @@ class AdvertsController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
-        dd('dddestroy');
-    }
     public function remove($id)
     {
         $advert = $this->obj->find($id);
