@@ -14,7 +14,6 @@ class Adverts extends Model
         'description',
         'profile_id',
         'category_id',
-        'photo',
     ];
 
     public function setDescription($value)

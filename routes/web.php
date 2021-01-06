@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController as HomeController;
 use App\Http\Controllers\AdvertsController as AdvertsController;
 use App\Http\Controllers\EstablishmentController as EstablishmentController;
+use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\LegalNatureController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,6 +23,12 @@ Route::prefix('legal_nature')->name('legalNatures.')->middleware('auth')->group(
     Route::get('/form', [LegalNatureController::class, 'create'])->name('form');
     Route::post('/store', [LegalNatureController::class, 'store'])->name('store');
     Route::put('/{id}/update', [LegalNatureController::class, 'update'])->name('update');
+});
+
+Route::prefix('imagem')->name('imagem.')->middleware('auth')->group(function () {
+    Route::post('/store', [ImagesController::class, 'store'])->name('store');
+    Route::put('/{id}/update', [ImagesController::class, 'update'])->name('update');
+    Route::put('/{id}/destroy', [ImagesController::class, 'destroy'])->name('destroy');
 });
 
 //Estabelecimento

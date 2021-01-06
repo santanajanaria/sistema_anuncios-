@@ -22,7 +22,6 @@ class CreateAdvertsTable extends Migration
             $table->unsignedBigInteger('tP_id');
             $table->foreign('tP_id')->references('id')->on('legal_natures');
             $table->string('description', 150);
-            $table->string('photo')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -24,7 +24,7 @@ class AdvertsRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => 'required|string|max:150',
+            'description' => 'required|string|max:250',
         ];
     }
     public function messages()

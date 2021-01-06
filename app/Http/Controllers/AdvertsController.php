@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdvertsRequest;
 use App\Models\Adverts;
 use App\Models\Category;
+use App\Models\Images;
 use App\Models\LegalNature;
 use App\Models\Profile;
 use App\Models\User;
@@ -63,12 +64,6 @@ class AdvertsController extends Controller
         $save->category_id = $request->category_id;
         $save->description = $request->description;
         $save->tP_id = $request->tP_id;
-        if ($request->hasFile('photo')) {
-            $path = $request->photo->store('photo');
-            $save->photo = $path;
-            $destinationPath = public_path('/imagens');
-            $request->photo->move($destinationPath, $path);
-        }
         $result = $save->save();
         if ($result) {
             DB::commit();
@@ -85,7 +80,8 @@ class AdvertsController extends Controller
         if ($result) {
             $view = Views::where('advert_id', $id)->get();
             $legalNature = LegalNature::where('user_id', $result->Profile->user_id)->get()->first();
-            return view('system.adverts.show', ['result' => $result, 'legalNature' => $legalNature, 'view' => $view]);
+            $photo = Images::where('advert_id', $id)->withTrashed()->get();
+            return view('system.adverts.show', ['result' => $result, 'legalNature' => $legalNature, 'view' => $view, 'photo' => $photo]);
         }
     }
 
