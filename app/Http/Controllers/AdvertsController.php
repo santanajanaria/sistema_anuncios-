@@ -80,7 +80,7 @@ class AdvertsController extends Controller
         if ($result) {
             $view = Views::where('advert_id', $id)->get();
             $legalNature = LegalNature::where('user_id', $result->Profile->user_id)->get()->first();
-            $photo = Images::where('advert_id', $id)->withTrashed()->get();
+            $photo = Images::where('advert_id', $id)->get();
             return view('system.adverts.show', ['result' => $result, 'legalNature' => $legalNature, 'view' => $view, 'photo' => $photo]);
         }
     }

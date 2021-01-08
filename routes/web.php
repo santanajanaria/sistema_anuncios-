@@ -27,8 +27,7 @@ Route::prefix('legal_nature')->name('legalNatures.')->middleware('auth')->group(
 
 Route::prefix('imagem')->name('imagem.')->middleware('auth')->group(function () {
     Route::post('/store', [ImagesController::class, 'store'])->name('store');
-    Route::put('/{id}/update', [ImagesController::class, 'update'])->name('update');
-    Route::put('/{id}/destroy', [ImagesController::class, 'destroy'])->name('destroy');
+    Route::get('/{id}/destroy', [ImagesController::class, 'destroy'])->name('destroy');
 });
 
 //Estabelecimento

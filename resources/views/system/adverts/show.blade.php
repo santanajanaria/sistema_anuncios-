@@ -8,6 +8,7 @@
                 <div class="row mb-2">
                     @foreach($photo as $image)
                     <img class="m-1" style="max-width: 30%;" src="{{asset(str_replace('photo','imagens',$image->photo))}}" alt="Photo">
+                    <a href="{{route('imagem.destroy',$image->id)}}" class="text-danger m-1"><i class="fas fa-archive"></i></a>
                     @endforeach
                     <!-- /.col -->
                 </div>

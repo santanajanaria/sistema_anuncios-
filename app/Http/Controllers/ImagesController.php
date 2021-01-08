@@ -12,7 +12,7 @@ class ImagesController extends Controller
 
     public function __construct()
     {
-        $this->vie = new Images();
+        $this->obj = new Images();
         $this->middleware('auth');
     }
 
@@ -36,13 +36,14 @@ class ImagesController extends Controller
         }
     }
 
-    public function update(Request $request, Images $images)
+    public function destroy($images)
     {
-        dd('update');
-    }
-
-    public function destroy(Images $images)
-    {
-        dd('destroy');
+        $result = Images::find($images);
+        $destroy = $result->delete();
+        if ($destroy) {
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Erro ao deletar imagem');
+        }
     }
 }
