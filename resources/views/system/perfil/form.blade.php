@@ -13,10 +13,10 @@
                     <form role="form" action="{{route('perfil.update',$profile->id)}}" method="post" enctype="multipart/form-data">
                         {!! method_field('PUT') !!}
                         @else
-                        <form name="formProduct" id="formProduct" method="post" action="{{route('perfil.store',$users)}}" enctype="multipart/form-data">
+                        <form name="formProduct" id="formProduct" method="post" action="{{route('perfil.store',$user)}}" enctype="multipart/form-data">
                             @endif
                             {!! csrf_field() !!}
-                            <input type="hidden" name="user_id" id="user_id" value="{{$users}}">
+                            <input type="hidden" name="user_id" id="user_id" value="{{$user}}">
                             <input type="hidden" name="tP_id" id="tP_id" value="{{$tP_id}}">
                             <div class="row">
                                 <div class="form-group col-md-6">

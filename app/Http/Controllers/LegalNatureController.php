@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LegalNature;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,8 @@ class LegalNatureController extends Controller
                 $categories = DB::table('categories')->get();
                 return redirect()->route('adverts.form', ['categories' => $categories, 'profile' => $profile]);
             } else {
-                return redirect()->route('perfil.form', $request->user_id);
+                $user = User::find($request->user_id);
+                return redirect()->route('perfil.form', $user->id);
             }
         } else {
             DB::rollBack();

@@ -49,7 +49,7 @@ class HomeController extends Controller
         $result = DB::table('profiles')->where('user_id', '=', $user)->first();
         $tP = DB::table('legal_natures')->where('user_id', $user)->first();
         if (isset($tP)) {
-            return view('system.perfil.form', ['users' => $user, 'tP_id' => $tP->id, 'profile' => $result]);
+            return view('system.perfil.form', ['user' => $user, 'tP_id' => $tP->id, 'profile' => $result]);
         } else {
             return redirect()->route('legalNatures.form', ['user_id' => $user]);
         }

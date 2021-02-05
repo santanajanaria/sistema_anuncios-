@@ -7,7 +7,7 @@
             <div class="card card-widget widget-user">
                 <div class="row mb-2">
                     @foreach($photo as $image)
-                    <img class="m-1" style="max-width: 30%;" src="{{asset(str_replace('photo','imagens',$image->photo))}}" alt="Photo">
+                    <img class="m-1" style="max-width: 20%;" src="{{asset(str_replace('photo','imagens',$image->photo))}}" alt="Photo">
                     <a href="{{route('imagem.destroy',$image->id)}}" class="text-danger m-1"><i class="fas fa-archive"></i></a>
                     @endforeach
                     <!-- /.col -->
@@ -67,7 +67,7 @@
                     @php
                     $soma = 0;
                     foreach($view as $v){
-                    if($v->advert_id == $advert->id){
+                    if($v->advert_id == $result->id){
                     $soma +=$v->look;
                     }
                     }

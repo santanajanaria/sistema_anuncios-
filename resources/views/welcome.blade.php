@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- Styles -->
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -403,12 +403,12 @@
         @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
-            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
+            <a href="{{ url('/home') }}" class="text-md text-bold text-light">Home</a>
             @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+            <a href="{{ route('login') }}" class="text-md text-bold text-light">Login</a>
 
             @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+            <a href="{{ route('register') }}" class="ml-4 text-md text-bold text-light">Register</a>
             @endif
             @endauth
         </div>
@@ -416,7 +416,7 @@
 
 
         <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-            <h1>Sistema de Anúncios</h1>
+            <img src="{{url('img/logo.jpeg')}}" alt="">
         </div>
     </div>
     </div>
