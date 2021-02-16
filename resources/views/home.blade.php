@@ -70,7 +70,23 @@
                         </ul>
                       </div>
                       <div class="col-5 text-center">
-                        <img src="{{asset(str_replace('photo','imagens',$advert->photo))}}" alt="user-avatar" class="img-circle img-fluid">
+                        @foreach($imagens as $image)
+                        @if($image->advert_id == $advert->id)
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img class="card-img-top" src="{{asset(str_replace('photo','imagens',$image->photo))}}" alt="Photo">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="..." class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="..." class="d-block w-100" alt="...">
+                            </div>
+                          </div>
+                        </div>
+                        @endif
+                        @endforeach
                       </div>
                     </div>
                   </div>

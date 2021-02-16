@@ -73,4 +73,8 @@ class Adverts extends Model
     {
         return $this->belongsTo(Views::class);
     }
+    public function Imagens()
+    {
+        return $this->belongsTo(Images::class);
+    }
 }

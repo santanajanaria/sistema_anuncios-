@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Adverts;
 use App\Models\Category;
+use App\Models\Images;
 use App\Models\Profile;
 use App\Models\Views;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class HomeController extends Controller
         $adverts = $this->adv->paginate(30);
         $views = $this->vie->all();
         $category = $this->cat->all();
-        return view('home', ['adverts' => $adverts, 'views' => $views, 'category' => $category]);
+        $imagens = Images::get();
+        return view('home', ['adverts' => $adverts, 'views' => $views, 'category' => $category, 'imagens' => $imagens]);
     }
     public function perfil()
     {
